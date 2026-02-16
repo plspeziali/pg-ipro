@@ -1,0 +1,57 @@
+name: ppo_no_pretrain_1
+method: bayes
+metric:
+  name: mean_hv
+  goal: maximize
+parameters:
+  num_seeds:
+    values: [ 5 ]
+  oracle:
+    aug:
+      distribution: q_uniform
+      min: 0.0001
+      max: 1
+      q: 0.0001
+    scale:
+      distribution: q_uniform
+      min: 1
+      max: 200
+      q: 10
+    lr_actor:
+      distribution: q_uniform
+      min: 0.0001
+      max: 0.001
+      q: 0.0001
+    lr_critic:
+      distribution: q_uniform
+      min: 0.0001
+      max: 0.001
+      q: 0.0001
+    hidden_size_actor:
+      values: [ 64, 128, 256 ]
+    hidden_size_critic:
+      values: [ 64, 128, 256 ]
+    num_hidden_layers_actor:
+      values: [ 1, 2, 3 ]
+    num_hidden_layers_critic:
+      values: [ 1, 2, 3 ]
+    max_grad_norm:
+      values: [ 0.5, 1, 5, 10 ]
+    v_coef:
+      distribution: q_uniform
+      min: 0.1
+      max: 0.7
+      q: 0.1
+    e_coef:
+      distribution: q_uniform
+      min: 0.0001
+      max: 0.1
+      q: 0.0001
+    n_steps:
+      values: [ 8, 16 ]
+    normalize_advantage:
+      values: [ true, false ]
+    pretraining_steps:
+      values: [ 0 ]
+    online_steps:
+      values: [ 2e4, 2.5e4, 3e4 ]

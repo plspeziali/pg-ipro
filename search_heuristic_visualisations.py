@@ -1,0 +1,42 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+ideal = np.array([0.0, 0.0])
+nadir = np.array([1.0, 1.0])
+x = np.linspace(0, 1, 200)
+y = np.linspace(0, 1, 200)
+X, Y = np.meshgrid(x, y)
+Z = np.maximum(np.abs(X - ideal[0]), np.abs(Y - ideal[1])) / (nadir[0] - ideal[0])
+levels = np.linspace(0, 1, 51)
+plt.figure(figsize=(6, 5))
+contour = plt.contourf(X, Y, Z, levels=levels, cmap='viridis', vmin=0, vmax=1)
+cbar = plt.colorbar(contour, label='Chebyshev distance value')
+cbar.set_ticks(np.linspace(0, 1, 6))
+plt.scatter(*ideal, color='red', label='Ideal')
+plt.title('Chebyshev Scalarization Function heatmap from Ideal point')
+plt.xlabel('Objective 1')
+plt.ylabel('Objective 2')
+plt.legend()
+plt.tight_layout()
+plt.show()
+
+
+ideal = np.array([0.0, 0.0])
+nadir = np.array([1.0, 1.0])
+x = np.linspace(0, 1, 200)
+y = np.linspace(0, 1, 200)
+X, Y = np.meshgrid(x, y)
+Z = (np.abs(X - ideal[0]) + np.abs(Y - ideal[1])) / (nadir[0] - ideal[0])  # normalized by range
+levels = np.linspace(0, 2, 51)
+plt.figure(figsize=(6, 5))
+contour = plt.contourf(X, Y, Z, levels=levels, cmap='viridis', vmin=0, vmax=2)
+cbar = plt.colorbar(contour, label='Manhattan distance value (L1)')
+cbar.set_ticks(np.linspace(0, 2, 5))
+plt.scatter(*ideal, color='red', label='Ideal')
+plt.title('Manhattan Distance Function heatmap from Ideal point')
+plt.xlabel('Objective 1')
+plt.ylabel('Objective 2')
+plt.legend()
+plt.tight_layout()
+plt.show()
