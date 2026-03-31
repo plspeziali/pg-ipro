@@ -1,0 +1,3 @@
+[submodule "gp_pref_elicit"]
+	path = gp_pref_elicit
+	url = https://github.com/lmzintgraf/gp_pref_elicit
